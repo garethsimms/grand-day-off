@@ -48,6 +48,14 @@ button.ghost{background:white;color:var(--ink)}
 aside{margin-top:25px;background:var(--mint);border:3px solid var(--ink);padding:15px;font-weight:900;box-shadow:4px 4px 0 var(--ink);transform:rotate(-1deg)}
 .summary{display:grid;gap:8px;padding:18px 0;font-weight:700}
 .summary p{margin:0;border-bottom:2px solid var(--ink);padding-bottom:7px}
-.checkpoint-card::after{content:"NOT YOUR PROBLEM";position:absolute;right:-35px;top:43%;background:var(--orange);border:2px solid var(--ink);padding:6px 10px;font-size:.61rem;font-weight:900;letter-spacing:.06em;transform:rotate(90deg)}
+
 @media(min-width:700px){.page{padding:40px}.card{padding:38px 40px 42px;box-shadow:13px 13px 0 var(--ink)}}
 @media(max-width:380px){.hero-card h1{font-size:3.65rem}.checkpoint-card h2,.done-card h2{font-size:2.7rem}.checkpoint-card::after{display:none}}
+
+.checkpoint-card h2{overflow-wrap:anywhere;word-break:normal;max-width:100%}
+.time-stamp{display:inline-flex;align-items:center;gap:10px;margin-top:18px;background:var(--orange);border:3px solid var(--ink);padding:7px 10px;box-shadow:4px 4px 0 var(--ink);transform:rotate(1deg)}
+.time-stamp small{font-size:.61rem;font-weight:900;letter-spacing:.08em}
+.time-stamp strong{font-family:"Archivo Black",Impact,sans-serif;font-size:1.45rem}
+.maps-button{display:block;text-decoration:none;text-align:center;margin-top:18px;padding:14px 12px;border:3px solid var(--ink);background:var(--yellow);color:var(--ink);font-weight:900;font-size:.86rem;box-shadow:4px 4px 0 var(--ink)}
+.maps-button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+@media(max-width:520px){.checkpoint-card h2{font-size:clamp(2.55rem,13vw,4.2rem);letter-spacing:-.075em}.card{width:calc(100vw - 38px)}.bodycopy{font-size:1.04rem}.page{padding:19px}}
