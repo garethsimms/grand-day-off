@@ -59,3 +59,31 @@ aside{margin-top:25px;background:var(--mint);border:3px solid var(--ink);padding
 .maps-button{display:block;text-decoration:none;text-align:center;margin-top:18px;padding:14px 12px;border:3px solid var(--ink);background:var(--yellow);color:var(--ink);font-weight:900;font-size:.86rem;box-shadow:4px 4px 0 var(--ink)}
 .maps-button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
 @media(max-width:520px){.checkpoint-card h2{font-size:clamp(2.55rem,13vw,4.2rem);letter-spacing:-.075em}.card{width:calc(100vw - 38px)}.bodycopy{font-size:1.04rem}.page{padding:19px}}
+
+/* iPhone-first: each mission should read as one screen, not a webpage */
+html,body,#root{min-height:100%;min-height:100dvh}
+.page{min-height:100dvh;padding:14px;align-items:center}
+.card{max-height:calc(100dvh - 28px);overflow:hidden;padding:20px 19px 21px}
+.checkpoint-card h2{font-size:clamp(2.25rem,10.5vw,4.15rem);line-height:.84;overflow-wrap:normal;word-break:keep-all;hyphens:none;margin:13px 0}
+.bodycopy{font-size:clamp(.91rem,3.8vw,1.08rem);line-height:1.34;margin:10px 0}
+.topline{font-size:.62rem}
+.progress{height:10px;margin-top:10px}
+.time-stamp{margin-top:12px;padding:5px 8px}
+.time-stamp strong{font-size:1.25rem}
+aside{margin-top:13px;padding:11px;font-size:.9rem}
+.maps-button{margin-top:12px;padding:11px 9px;font-size:.78rem}
+.checkpoint-card button{margin-top:11px;padding:12px 10px;font-size:.84rem}
+.micro{margin-top:10px;font-size:.65rem}
+.done-card h2{font-size:clamp(2.55rem,11vw,4.5rem);margin:14px 0}
+.summary{gap:4px;padding:10px 0;font-size:.9rem}
+.summary p{padding-bottom:4px}
+.done-card .big-line{font-size:1rem}
+.done-card button{padding:12px;margin-top:12px}
+@media(max-height:760px){
+ .card{padding:15px 16px}
+ .checkpoint-card h2{font-size:2.2rem;margin:9px 0}
+ .bodycopy{font-size:.86rem}
+ .time-stamp{margin-top:8px}
+ aside,.maps-button,.checkpoint-card button{margin-top:9px}
+ .micro{display:none}
+}
