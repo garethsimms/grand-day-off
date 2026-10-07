@@ -17,15 +17,15 @@ function mapsUrl(destination) {
 }
 
 function App(){
- const [started,setStarted]=useState(false);
+ const [started,setStarted]=useState(()=>localStorage.getItem('gdo-started')==='true');
  const [step,setStep]=useState(()=>Number(localStorage.getItem('gdo-step')||0));
  const current=checkpoints[Math.min(step,checkpoints.length-1)];
  const complete=step>=checkpoints.length;
  const progress=useMemo(()=>Math.min((step/checkpoints.length)*100,100),[step]);
- const advance=()=>{const next=step+1;localStorage.setItem('gdo-step',String(next));setStep(next);window.scrollTo({top:0,behavior:'smooth'})};
- const reset=()=>{localStorage.removeItem('gdo-step');setStep(0);setStarted(false)};
+ const advance=()=>{const next=step+1;localStorage.setItem('gdo-step',String(next));localStorage.setItem('gdo-started','true');setStep(next);window.scrollTo({top:0,behavior:'smooth'})};
+ const reset=()=>{localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');setStep(0);setStarted(false)};
 
- if(!started)return <main className="page hero-page"><section className="card hero-card"><div className="badge">A Gareth Simms Production</div><h1>A Grand<br/>Day Off.</h1><p className="lede">Maroes, today you have exactly one responsibility:</p><p className="big-line">Do what the app tells you.</p><div className="rules"><span>No planning.</span><span>No shop.</span><span>No decisions.</span></div><button onClick={()=>setStarted(true)}>LET'S GO →</button><p className="micro">Everything is organised. Just follow along.</p></section></main>;
+ if(!started)return <main className="page hero-page"><section className="card hero-card"><div className="badge">A Gareth Simms Production</div><h1>A Grand<br/>Day Off.</h1><p className="lede">Maroes, today you have exactly one responsibility:</p><p className="big-line">Do what the app tells you.</p><div className="rules"><span>No planning.</span><span>No shop.</span><span>No decisions.</span></div><button onClick={()=>{localStorage.setItem('gdo-started','true');setStarted(true)}}>LET'S GO →</button><p className="micro">Everything is organised. Just follow along.</p></section></main>;
 
  if(complete)return <main className="page"><section className="card done-card"><div className="badge">System status</div><h2>Maroescha restored.</h2><div className="summary"><p>✓ 0 shifts worked</p><p>✓ 1 face fondling</p><p>✓ suspicious quantities of vegetables</p><p>✓ 1 completely unnecessary book</p><p>✓ ≥1 wine</p><p>✓ 0 decisions that mattered</p></div><p className="big-line">Grand Day Off complete. ❤️</p><button className="ghost" onClick={reset}>Reset demo</button></section></main>;
 
