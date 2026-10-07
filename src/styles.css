@@ -87,3 +87,17 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
  aside,.maps-button,.checkpoint-card button{margin-top:9px}
  .micro{display:none}
 }
+
+/* Hero has its own viewport rhythm: never clip the primary action */
+.hero-card{max-height:none;overflow:visible}
+.hero-card h1{font-size:clamp(3.35rem,16vw,6.6rem);margin:13px 0}
+.hero-card .lede{font-size:clamp(.92rem,3.8vw,1.08rem);line-height:1.32;margin:10px 0}
+.hero-card .big-line{font-size:1rem}
+.hero-card .rules{margin:16px 0 10px;gap:6px;font-size:.82rem}
+.hero-card button{margin-top:10px;padding:13px 14px}
+.hero-card .micro{margin-top:10px}
+@media(max-height:760px){
+ .hero-card h1{font-size:3.2rem}
+ .hero-card .rules{margin:10px 0 6px}
+ .hero-card .micro{display:none}
+}
