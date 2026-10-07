@@ -101,3 +101,11 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
  .hero-card .rules{margin:10px 0 6px}
  .hero-card .micro{display:none}
 }
+
+.damage-input{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:11px;border:3px solid var(--ink);background:white;padding:8px 10px;font-weight:900}
+.damage-input>span{font-size:.72rem;letter-spacing:.08em}
+.damage-input div{display:flex;align-items:center;gap:4px}
+.damage-input input{width:78px;border:0;border-bottom:2px solid var(--ink);background:transparent;font:900 1.05rem "DM Sans",sans-serif;text-align:right;outline:none}
+.damage-total{display:grid;gap:3px;background:var(--yellow);border:3px solid var(--ink);padding:12px;margin:10px 0;box-shadow:4px 4px 0 var(--ink);transform:rotate(-1deg)}
+.damage-total small{font-weight:900;letter-spacing:.08em}.damage-total strong{font-family:"Archivo Black",Impact,sans-serif;font-size:2rem}.damage-total span{font-size:.78rem;font-weight:700}
+.pay-gareth{background:var(--blue)}
