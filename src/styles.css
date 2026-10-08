@@ -109,3 +109,12 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 .damage-total{display:grid;gap:3px;background:var(--yellow);border:3px solid var(--ink);padding:12px;margin:10px 0;box-shadow:4px 4px 0 var(--ink);transform:rotate(-1deg)}
 .damage-total small{font-weight:900;letter-spacing:.08em}.damage-total strong{font-family:"Archivo Black",Impact,sans-serif;font-size:2rem}.damage-total span{font-size:.78rem;font-weight:700}
 .pay-gareth{background:var(--blue)}
+
+/* Two-page intro, with its own responsive typography and visible CTA */
+.intro-card{display:flex;flex-direction:column;gap:9px;max-height:none;overflow:visible}
+.intro-card h1{font-size:clamp(2.2rem,9.6vw,3.65rem);line-height:.91;letter-spacing:-.065em;margin:10px 0 4px;max-width:none;overflow-wrap:normal}
+.intro-card p{margin:0;font-size:clamp(.85rem,3.45vw,1rem);line-height:1.29}
+.intro-card .intro-shout{font-family:"Archivo Black",Impact,sans-serif;background:var(--pink);border:2px solid var(--ink);padding:8px;transform:rotate(-1deg);font-size:1.03rem}
+.intro-card .intro-warning{font-family:"Archivo Black",Impact,sans-serif;background:var(--orange);border:3px solid var(--ink);padding:10px 8px;font-size:clamp(1.15rem,5vw,1.7rem);line-height:1.06}
+.intro-card button{margin-top:8px;flex-shrink:0}
+@media(max-height:740px){.intro-card{gap:6px;padding:13px}.intro-card h1{font-size:2.1rem;margin:5px 0}.intro-card p{font-size:.82rem;line-height:1.2}.intro-card button{padding:10px}}
