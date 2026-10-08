@@ -38,7 +38,7 @@ function App(){
    <h1>HAPPY DAY OFF, MAROES!</h1>
    <p>Today is <strong>YOUR</strong> day. Now, I know you.</p>
    <p>If I'd simply given you a day off, you'd stay home, order McDonald's on Uber Eats and watch Gilmore Girls all day.</p>
-   <p>Which, to be fair, sounds pretty fucking great.</p>
+   <p>But we live in a city we don't always make the most of.</p>
    <p className="intro-shout">BUT NOT TODAY.</p>
    <p>I've planned you a little adventure. You don't have to follow it religiously (although I'd love it if you did). Just trust me. ❤️</p>
    <button onClick={()=>setIntroPage(1)}>LET'S DO THIS →</button>
