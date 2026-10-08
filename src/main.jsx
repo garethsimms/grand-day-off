@@ -18,6 +18,7 @@ function mapsUrl(destination) {
 
 function App(){
  const [started,setStarted]=useState(()=>localStorage.getItem('gdo-started')==='true');
+ const [introPage,setIntroPage]=useState(0);
  const [step,setStep]=useState(()=>Number(localStorage.getItem('gdo-step')||0));
  const [expenses,setExpenses]=useState(()=>JSON.parse(localStorage.getItem('gdo-expenses')||'{}'));
  const [amount,setAmount]=useState('');
@@ -27,9 +28,28 @@ function App(){
  const paidCheckpoint=[0,2,3,4,5].includes(step);
  const progress=useMemo(()=>Math.min((step/checkpoints.length)*100,100),[step]);
  const advance=()=>{let nextExpenses=expenses;if(paidCheckpoint&&amount){nextExpenses={...expenses,[step]:Number(String(amount).replace(',','.'))||0};setExpenses(nextExpenses);localStorage.setItem('gdo-expenses',JSON.stringify(nextExpenses));}const next=step+1;localStorage.setItem('gdo-step',String(next));localStorage.setItem('gdo-started','true');setStep(next);setAmount('');window.scrollTo({top:0,behavior:'smooth'})};
- const reset=()=>{localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');localStorage.removeItem('gdo-expenses');setExpenses({});setAmount('');setStep(0);setStarted(false)};
+ const reset=()=>{localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');localStorage.removeItem('gdo-expenses');setExpenses({});setAmount('');setStep(0);setStarted(false);setIntroPage(0)};
 
- if(!started)return <main className="page hero-page"><section className="card hero-card"><div className="badge">A Gareth Simms Production</div><h1>A Grand<br/>Day Off.</h1><p className="lede">Maroes, today you have exactly one responsibility:</p><p className="big-line">Do what the app tells you.</p><div className="rules"><span>No planning.</span><span>No shop.</span><span>No decisions.</span></div><button onClick={()=>{localStorage.setItem('gdo-started','true');setStarted(true)}}>LET'S GO →</button><p className="micro">Everything is organised. Just follow along.</p></section></main>;
+ if(!started)return <main className="page hero-page"><section className="card hero-card intro-card">
+  <div className="badge">A Gareth Simms Production · {introPage+1}/2</div>
+  {introPage===0 ? <>
+   <h1>HAPPY DAY OFF, MAROES!</h1>
+   <p>Today is <strong>YOUR</strong> day. Now, I know you.</p>
+   <p>If I'd simply given you a day off, you'd stay home, order McDonald's on Uber Eats and watch Gilmore Girls all day.</p>
+   <p>Which, to be fair, sounds pretty fucking great.</p>
+   <p className="intro-shout">BUT NOT TODAY.</p>
+   <p>I've planned you a little adventure. You don't have to follow it religiously (although I'd love it if you did). Just trust me. ❤️</p>
+   <button onClick={()=>setIntroPage(1)}>LET'S DO THIS →</button>
+  </> : <>
+   <h1>ONE VERY IMPORTANT THING.</h1>
+   <p>This app guides you through the day, one checkpoint at a time.</p>
+   <p className="intro-shout">NO SKIPPING AHEAD. 👀</p>
+   <p>Most of the day is yours to enjoy at your own pace. But a couple of things are booked, and for those:</p>
+   <p className="intro-warning">YOU. MUST. BE. ON. TIME.</p>
+   <p>Yes, Maroes. I'm talking to you. The app will tell you where to go and when.</p>
+   <button onClick={()=>{localStorage.setItem('gdo-started','true');setStarted(true)}}>RIGHT. OFF YOU GO →</button>
+  </>}
+ </section></main>;
 
  if(complete)return <main className="page"><section className="card done-card"><div className="badge">System status</div><h2>Maroescha restored.</h2><div className="summary"><p>✓ 0 shifts worked</p><p>✓ 1 face fondling</p><p>✓ suspicious quantities of vegetables</p><p>✓ 1 completely unnecessary book</p><p>✓ ≥1 wine</p><p>✓ 0 decisions that mattered</p></div><div className="damage-total"><small>TODAY'S DAMAGE</small><strong>€ {total.toFixed(2).replace('.',',')}</strong><span>Gareth said he was paying. Time to collect.</span></div><p className="big-line">Grand Day Off complete. ❤️</p><button className="pay-gareth" onClick={()=>navigator.clipboard?.writeText(`Grand Day Off € ${total.toFixed(2)}`)}>MAKE GARETH PAY →</button><button className="ghost" onClick={reset}>Reset demo</button></section></main>;
 
