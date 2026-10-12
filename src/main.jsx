@@ -56,6 +56,7 @@ function App(){
    <p>Come back to this very same app on the day. It will guide you through your adventure, one surprise at a time.</p>
    <p className="gift-caveat">* Date still to be confirmed. A few scheming dominoes need to fall into place first. 👀</p>
    <p className="gift-foot">P.S. Punctuality may be required. Yes, really. ⏰</p>
+   <button className="gift-back" onClick={()=>{localStorage.setItem("gdo-gift-opened","false");setGiftOpened(false)}}>← SHOW MY PRESENT AGAIN</button>
   </>}
  </section></main>;
 
