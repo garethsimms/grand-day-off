@@ -133,3 +133,5 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 @media(max-height:740px){.gift-card{gap:9px;padding:15px}.gift-card h1{font-size:2.4rem}.gift-ticket{padding:11px}.gift-card p{font-size:.9rem}}
 
 .gift-card .gift-caveat{font-weight:900}
+
+.gift-card button.gift-back{background:var(--cream);color:var(--ink);font-size:.82rem;padding:11px;margin-top:0}
