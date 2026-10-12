@@ -131,3 +131,5 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 .gift-card button{margin-top:7px}
 .gift-card .gift-foot{font-size:.83rem;font-weight:900}
 @media(max-height:740px){.gift-card{gap:9px;padding:15px}.gift-card h1{font-size:2.4rem}.gift-ticket{padding:11px}.gift-card p{font-size:.9rem}}
+
+.gift-card .gift-caveat{font-weight:900}
