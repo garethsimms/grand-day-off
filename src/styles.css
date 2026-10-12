@@ -135,3 +135,6 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 .gift-card .gift-caveat{font-weight:900}
 
 .gift-card button.gift-back{background:var(--cream);color:var(--ink);font-size:.82rem;padding:11px;margin-top:0}
+
+/* Match the caveat to the P.S. line in both weight and type size */
+.gift-card .gift-caveat{font-size:.83rem;font-weight:900;line-height:1.35}
