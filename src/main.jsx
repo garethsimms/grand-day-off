@@ -43,14 +43,14 @@ function App(){
    <div className="gift-sticker">TOP SECRET 💌</div>
    <h1>HAPPY BIRTHDAY, MAROES! 💖</h1>
    <p>You've been given something very special.</p>
-   <div className="gift-ticket"><small>YOUR PRESENT</small><strong>ONE GRAND DAY OFF.</strong><span>TUESDAY 27 OCTOBER</span></div>
+   <div className="gift-ticket"><small>YOUR PRESENT</small><strong>ONE GRAND DAY OFF.</strong><span>TUESDAY 27 OCTOBER*</span></div>
    <p>No shop. No responsibilities. No planning. No decisions.</p>
    <p>I've arranged a day just for you. All you have to do is show up. ❤️</p>
    <button onClick={()=>{localStorage.setItem('gdo-gift-opened','true');setGiftOpened(true)}}>UNWRAP YOUR PRESENT →</button>
   </> : <>
    <div className="gift-sticker">🔒 CLASSIFIED</div>
    <h1>YOUR ADVENTURE IS LOCKED.</h1>
-   <p>Your instructions will be revealed on <strong>Tuesday 27 October.</strong></p>
+   <p>Your instructions will be revealed on <strong>Tuesday 27 October*.</strong></p>
    <div className="gift-ticket"><small>UNTIL THEN</small><strong>ABSOLUTELY NO SNOOPING.</strong><span>Love, Gareth ❤️</span></div>
    <p>Come back to this very same app on the 27th. It will guide you through your day, one surprise at a time.</p>
    <p className="gift-foot">P.S. Punctuality may be required. Yes, really. ⏰</p>
