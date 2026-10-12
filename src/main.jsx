@@ -16,24 +16,49 @@ function mapsUrl(destination) {
   return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(destination) + '&travelmode=walking';
 }
 
+function amsterdamDay(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Amsterdam',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
 function App(){
- if(new URLSearchParams(window.location.search).has('reset')){if(window.confirm('Reset the Grand Day Off demo and erase saved progress and expenses?')){localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');localStorage.removeItem('gdo-expenses');}window.history.replaceState({},'',window.location.pathname);}
+ const day=amsterdamDay();
+ const preview=new URLSearchParams(window.location.search).get('preview');
+ const adventureOpen=day>='2026-10-27'||preview==='day';
+ const [giftOpened,setGiftOpened]=useState(()=>localStorage.getItem('gdo-gift-opened')==='true');
+ if(new URLSearchParams(window.location.search).has('reset')){if(window.confirm('Reset the Grand Day Off demo and erase saved progress and expenses?')){localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');localStorage.removeItem('gdo-expenses');localStorage.removeItem('gdo-gift-opened');}window.history.replaceState({},'',window.location.pathname);}
  const [started,setStarted]=useState(()=>localStorage.getItem('gdo-started')==='true');
  const [introPage,setIntroPage]=useState(0);
  const [step,setStep]=useState(()=>Number(localStorage.getItem('gdo-step')||0));
  const [expenses,setExpenses]=useState(()=>JSON.parse(localStorage.getItem('gdo-expenses')||'{}'));
  const [amount,setAmount]=useState('');
- const [resetPrompt,setResetPrompt]=useState(false);
+
  const current=checkpoints[Math.min(step,checkpoints.length-1)];
  const complete=step>=checkpoints.length;
  const total=Object.values(expenses).reduce((sum,value)=>sum+(Number(value)||0),0);
  const paidCheckpoint=[0,2,3,4,5].includes(step);
  const progress=useMemo(()=>Math.min((step/checkpoints.length)*100,100),[step]);
  const advance=()=>{let nextExpenses=expenses;if(paidCheckpoint&&amount){nextExpenses={...expenses,[step]:Number(String(amount).replace(',','.'))||0};setExpenses(nextExpenses);localStorage.setItem('gdo-expenses',JSON.stringify(nextExpenses));}const next=step+1;localStorage.setItem('gdo-step',String(next));localStorage.setItem('gdo-started','true');setStep(next);setAmount('');window.scrollTo({top:0,behavior:'smooth'})};
- const reset=()=>{localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');localStorage.removeItem('gdo-expenses');setExpenses({});setAmount('');setStep(0);setStarted(false);setIntroPage(0);setResetPrompt(false)};
+ const reset=()=>{localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');localStorage.removeItem('gdo-expenses');setExpenses({});setAmount('');setStep(0);setStarted(false);setIntroPage(0);setGiftOpened(false)};
+
+ if(!adventureOpen)return <main className="page gift-page"><section className="card gift-card">
+  <div className="badge">A Gareth Simms Production™</div>
+  {!giftOpened ? <>
+   <div className="gift-sticker">TOP SECRET 💌</div>
+   <h1>HAPPY BIRTHDAY, MAROES! 💖</h1>
+   <p>You've been given something very special.</p>
+   <div className="gift-ticket"><small>YOUR PRESENT</small><strong>ONE GRAND DAY OFF.</strong><span>TUESDAY 27 OCTOBER</span></div>
+   <p>No shop. No responsibilities. No planning. No decisions.</p>
+   <p>I've arranged a day just for you. All you have to do is show up. ❤️</p>
+   <button onClick={()=>{localStorage.setItem('gdo-gift-opened','true');setGiftOpened(true)}}>UNWRAP YOUR PRESENT →</button>
+  </> : <>
+   <div className="gift-sticker">🔒 CLASSIFIED</div>
+   <h1>YOUR ADVENTURE IS LOCKED.</h1>
+   <p>Your instructions will be revealed on <strong>Tuesday 27 October.</strong></p>
+   <div className="gift-ticket"><small>UNTIL THEN</small><strong>ABSOLUTELY NO SNOOPING.</strong><span>Love, Gareth ❤️</span></div>
+   <p>Come back to this very same app on the 27th. It will guide you through your day, one surprise at a time.</p>
+   <p className="gift-foot">P.S. Punctuality may be required. Yes, really. ⏰</p>
+  </>}
+ </section></main>;
 
  if(!started)return <main className="page hero-page"><section className="card hero-card intro-card">
-  <div className="badge" onClick={()=>setResetPrompt(true)}>A Gareth Simms Production · {introPage+1}/2</div>
+  <div className="badge">A Gareth Simms Production · {introPage+1}/2</div>
   {introPage===0 ? <>
    <h1>HAPPY DAY OFF, MAROES!</h1>
    <p>Today is <strong>YOUR</strong> day. Now, I know you.</p>
