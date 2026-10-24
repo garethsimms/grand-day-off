@@ -151,3 +151,5 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 
 .next-booking{background:var(--yellow);border:2px solid var(--ink);padding:8px 10px;font-size:.77rem;font-weight:900;line-height:1.25;margin:9px 0;box-shadow:3px 3px 0 var(--ink)}
 .checkpoint-card:has(.afternoon-options){overflow-y:auto}
+
+/* Travel modes will be shown with source-labelled route information. */
