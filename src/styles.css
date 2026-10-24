@@ -138,3 +138,13 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 
 /* Match the caveat to the P.S. line in both weight and type size */
 .gift-card .gift-caveat{font-size:.83rem;font-weight:900;line-height:1.35}
+
+/* Three weather-friendly afternoon choices */
+.checkpoint-card:has(.afternoon-options){max-height:calc(100dvh - 28px);overflow-y:auto;overscroll-behavior:contain}
+.afternoon-options{display:grid;gap:8px;margin-top:12px}
+.afternoon-option{border:2px solid var(--ink);background:#fff;padding:9px 10px;display:grid;gap:3px}
+.afternoon-option:first-child{background:var(--mint)}
+.afternoon-option strong{font-weight:900;font-size:.9rem}
+.afternoon-option span{font-size:.8rem;font-weight:700}
+.afternoon-option small{font-size:.76rem}
+.afternoon-option a{justify-self:start;color:var(--ink);font-weight:900;font-size:.75rem;padding:5px 0;text-decoration:underline}
