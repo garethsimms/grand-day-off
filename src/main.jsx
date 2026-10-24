@@ -8,11 +8,16 @@ const afternoonOptions = [
  {name:"Lotti’s at The Hoxton", mood:'A little buzz ☕', detail:'Livelier surroundings, coffee or wine.', destination:'Lottis The Hoxton, Herengracht 255, Amsterdam'}
 ];
 
+const nightOptions = [
+ {name:'Vermeers Wijnkamer', detail:'A last glass of wine near Centraal.', destination:'Vermeers Wijnkamer, Zeedijk 11, Amsterdam'},
+ {name:'Rosalia’s Menagerie', detail:'Cocktails on the way towards Centraal.', destination:'Rosalias Menagerie, Kloveniersburgwal 20, Amsterdam'}
+];
 const checkpoints = [
   { eyebrow:'Checkpoint 01', time:'11:30', title:'Brunch. Obviously.', body:'Start your day with something delicious. No shop talk, no to-do list, no decisions more consequential than sweet or savoury.', cta:'Brunch acquired', note:'IMPORTANT: Head off by 12:20. Your next appointment is booked, and punctuality is required. ⏰', destination:'Lagom Amsterdam, Snoekjessteeg 1-3, Amsterdam', place:'Lagom' },
   { eyebrow:'Checkpoint 02', time:'12:45', title:'Time to switch off.', body:'Be here at 12:45 for a little chat before your 13:00 appointment. Then you have 80 glorious minutes of being looked after. Absolutely nothing is required of you.', cta:'Face successfully pampered', note:'REMM Facials · Keizersgracht 394 · Appointment 13:00–14:20. Arrive 15 minutes early.', destination:'REMM Facials, Keizersgracht 394, Amsterdam', place:'REMM Facials' },
   { eyebrow:'Checkpoint 03', time:null, title:'Your next appointment: nothing.', body:'Take one of your birthday books, find a comfortable corner and enjoy doing absolutely nothing. Three suggestions, zero obligations. Pick whatever suits your mood (and the weather).', cta:'Successfully did nothing', note:'The Library Bar might feel particularly lovely. But this is your afternoon, your call. ❤️', destination:'Amsterdam' },
-  { eyebrow:'Final checkpoint', time:'18:00', timeLabel:'DINNER AT', title:'One last surprise.', body:"Your final reservation is waiting. Head to Scheepskameel for 18:00. There may be more to this evening than you think. 👀", cta:'Grand Day Off complete', note:'Aim to leave around 17:15 so you can get there comfortably. Trust the process.', destination:'Scheepskameel, Kattenburgerstraat 7, Gebouw 24, Amsterdam', place:'Scheepskameel' }
+  { eyebrow:'Checkpoint 04', time:'18:00', timeLabel:'DINNER AT', title:'One last surprise.', body:"Your final reservation is waiting. Head to Scheepskameel for 18:00. There may be more to this evening than you think. 👀", cta:'Grand Day Off complete', note:'Aim to leave around 17:15 so you can get there comfortably. Trust the process.', destination:'Scheepskameel, Kattenburgerstraat 7, Gebouw 24, Amsterdam', place:'Scheepskameel' },
+  { eyebrow:'After hours', time:null, title:"Don't want the night to end?", body:'One more glass with the girls? Entirely optional. Here are a couple of ideas on the way towards Centraal. Or head home whenever you fancy.', cta:'That was a grand day off', note:'No booking. No obligation. Just a suggestion.' }
 ];
 
 function mapsUrl(destination) {
@@ -64,7 +69,7 @@ function App(){
  </section></main>;
 
  if(!started)return <main className="page hero-page"><section className="card hero-card intro-card">
-  <div className="badge">A Gareth Simms Production · {introPage+1}/2</div>
+  <div className="badge">A Gareth Simms Production · {introPage+1}/3</div>
   {introPage===0 ? <>
    <h1>HAPPY DAY OFF, MAROES!</h1>
    <p>Today is <strong>YOUR</strong> day. Now, I know you.</p>
@@ -73,19 +78,26 @@ function App(){
    <p className="intro-shout">BUT NOT TODAY.</p>
    <p>I've planned you a little adventure. You don't have to follow it religiously (although I'd love it if you did). Just trust me. ❤️</p>
    <button onClick={()=>setIntroPage(1)}>LET'S DO THIS →</button>
-  </> : <>
+  </> : introPage===1 ? <>
    <h1>ONE VERY IMPORTANT THING.</h1>
    <p>This app guides you through the day, one checkpoint at a time.</p>
    <p className="intro-shout">NO SKIPPING AHEAD. 👀</p>
    <p>Most of the day is yours to enjoy at your own pace. But a couple of things are booked, and for those:</p>
    <p className="intro-warning">YOU. MUST. BE. ON. TIME.</p>
    <p>The app will tell you where to go and when.</p>
+   <button onClick={()=>setIntroPage(2)}>WHAT DO I NEED? →</button>
+  </> : <>
+   <h1>BEFORE YOU LEAVE…</h1>
+   <p>Bring one of your birthday books. No buying another one. 👀</p>
+   <p>Phone, keys, wallet, comfy shoes, and a coat or umbrella. Amsterdam may have opinions about the weather.</p>
+   <p className="intro-shout">FIRST RESERVATION: 11:30</p>
+   <p>Everything else is taken care of. All you have to do is turn up. ❤️</p>
    <button onClick={()=>{localStorage.setItem('gdo-started','true');setStarted(true)}}>RIGHT. OFF YOU GO →</button>
   </>}
  </section></main>;
 
- if(complete)return <main className="page"><section className="card done-card"><div className="badge" onClick={()=>setResetPrompt(true)}>System status</div><h2>Maroescha restored.</h2><div className="summary"><p>✓ 0 shifts worked</p><p>✓ 1 face fondling</p><p>✓ a very well-rested face</p><p>✓ 0 additional books on the unread pile</p><p>✓ ≥1 wine</p><p>✓ 0 decisions that mattered</p></div><div className="damage-total"><small>TODAY'S DAMAGE</small><strong>€ {total.toFixed(2).replace('.',',')}</strong><span>Gareth said he was paying. Time to collect.</span></div><p className="big-line">Grand Day Off complete. ❤️</p><button className="pay-gareth" onClick={()=>navigator.clipboard?.writeText(`Grand Day Off € ${total.toFixed(2)}`)}>MAKE GARETH PAY →</button></section></main>;
+ if(complete)return <main className="page"><section className="card done-card"><div className="badge" onClick={()=>{}}>System status</div><h2>Maroescha restored.</h2><div className="summary"><p>✓ 0 shifts worked</p><p>✓ 1 face fondling</p><p>✓ a very well-rested face</p><p>✓ 0 additional books on the unread pile</p><p>✓ ≥1 wine</p><p>✓ 0 decisions that mattered</p></div><div className="damage-total"><small>TODAY'S DAMAGE</small><strong>€ {total.toFixed(2).replace('.',',')}</strong><span>Gareth said he was paying. Time to collect.</span></div><p className="big-line">Grand Day Off complete. ❤️</p><button className="pay-gareth" onClick={()=>navigator.clipboard?.writeText(`Grand Day Off € ${total.toFixed(2)}`)}>MAKE GARETH PAY →</button></section></main>;
 
- return <main className="page"><section className="card checkpoint-card"><div className="topline"><span onClick={()=>setResetPrompt(true)}>{current.eyebrow}</span><span>{step+1}/{checkpoints.length}</span></div><div className="progress"><i style={{width:`${progress}%`}}/></div>{current.time&&<div className="time-stamp"><small>{current.timeLabel||"BE THERE AT"}</small><strong>{current.time}</strong></div>}<h2>{current.title}</h2><p className="bodycopy">{current.body}</p><aside>{current.note}</aside>{paidCheckpoint&&<label className="damage-input"><span>DAMAGE?</span><div><b>€</b><input inputMode="decimal" placeholder="0,00" value={amount} onChange={e=>setAmount(e.target.value)} /></div></label>}{step===2 ? <div className="afternoon-options">{afternoonOptions.map((option,i)=><div className="afternoon-option" key={option.name}><strong>{i===0?"★ ":""}{option.name}</strong><span>{option.mood}</span><small>{option.detail}</small><a href={mapsUrl(option.destination)} target="_blank" rel="noreferrer">DIRECTIONS ↗</a></div>)}</div> : <a className="maps-button" href={mapsUrl(current.destination)} target="_blank" rel="noreferrer">DIRECTIONS TO {current.place?.toUpperCase()} ↗</a>}<button onClick={advance}>{current.cta} →</button><p className="micro">One thing at a time. No peeking ahead.</p></section></main>
+ return <main className="page"><section className="card checkpoint-card"><div className="topline"><span onClick={()=>setResetPrompt(true)}>{current.eyebrow}</span><span>{step+1}/{checkpoints.length}</span></div><div className="progress"><i style={{width:`${progress}%`}}/></div>{current.time&&<div className="time-stamp"><small>{current.timeLabel||"BE THERE AT"}</small><strong>{current.time}</strong></div>}<h2>{current.title}</h2>{step<3&&<p className="next-booking">UP NEXT: {step===0?'ARRIVE AT REMM BY 12:45':step===1?'DINNER RESERVATION AT 18:00':'NEXT RESERVATION AT 18:00'}</p>}<p className="bodycopy">{current.body}</p><aside>{current.note}</aside>{paidCheckpoint&&<label className="damage-input"><span>DAMAGE?</span><div><b>€</b><input inputMode="decimal" placeholder="0,00" value={amount} onChange={e=>setAmount(e.target.value)} /></div></label>}{step===4 ? <div className="afternoon-options">{nightOptions.map(option=><div className="afternoon-option" key={option.name}><strong>{option.name}</strong><small>{option.detail}</small><a href={mapsUrl(option.destination)} target="_blank" rel="noreferrer">DIRECTIONS ↗</a></div>)}</div> : step===2 ? <div className="afternoon-options">{afternoonOptions.map((option,i)=><div className="afternoon-option" key={option.name}><strong>{i===0?"★ ":""}{option.name}</strong><span>{option.mood}</span><small>{option.detail}</small><a href={mapsUrl(option.destination)} target="_blank" rel="noreferrer">DIRECTIONS ↗</a></div>)}</div> : <a className="maps-button" href={mapsUrl(current.destination)} target="_blank" rel="noreferrer">DIRECTIONS TO {current.place?.toUpperCase()} ↗</a>}<button onClick={advance}>{current.cta} →</button><p className="micro">One thing at a time. No peeking ahead.</p></section></main>
 }
 createRoot(document.getElementById('root')).render(<App/>);
