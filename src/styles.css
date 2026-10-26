@@ -159,3 +159,5 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 .spot-input{display:block;width:100%;box-sizing:border-box;min-height:48px;padding:10px 12px;font:inherit;border:2px solid #111;border-radius:0;background:#fff;margin-top:8px}
 
 .dinner-rating{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:2px solid #111;padding:8px 0}.dinner-rating>strong{font-size:1.2rem}.dinner-rating .rating-choices{display:flex;gap:8px;margin:0}.dinner-rating .rating-choices button{min-width:65px;padding:8px 14px;font-size:1.3rem}
+
+.packing-list{list-style:none;margin:16px 0;padding:0;display:grid;gap:12px}.packing-list li{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.35);border:2px solid #111;padding:12px}.packing-list .packing-icon{font-size:1.65rem;line-height:1.1;flex:0 0 auto}.packing-list strong{display:block;font-weight:900;letter-spacing:.025em}.packing-list p{margin:5px 0 0;line-height:1.3}
