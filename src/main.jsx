@@ -47,6 +47,7 @@ function App(){
  const [sideQuestOpen,setSideQuestOpen]=useState(false);
  const [dinnerReview,setDinnerReview]=useState(false);
  const [dinnerRatings,setDinnerRatings]=useState({});
+ const [dayScore,setDayScore]=useState(null);
 
  const current=checkpoints[Math.min(step,checkpoints.length-1)];
  const complete=step>=checkpoints.length;
