@@ -153,3 +153,5 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 .checkpoint-card:has(.afternoon-options){overflow-y:auto}
 
 /* Travel modes will be shown with source-labelled route information. */
+
+.rating-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.rating-choices button{font-size:clamp(12px,3vw,17px);padding:15px 8px;background:#fff;color:#111}.rating-choices button.selected{background:#6eebbb;box-shadow:2px 2px 0 #111}
