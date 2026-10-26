@@ -173,3 +173,5 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 /* The closing survey must scroll rather than clipping the report action below it. */
 .done-card{max-height:none;overflow:visible}
 .page:has(.done-card){overflow-x:hidden;overflow-y:visible;align-items:start;place-items:center;padding-top:24px;padding-bottom:34px}
+
+.wait-card{max-height:none;overflow:visible}.wait-card h2{font-size:clamp(2.4rem,10vw,4.5rem)}.wait-time{margin-top:24px;padding:15px 12px;background:var(--yellow);border:3px solid var(--ink);font-weight:900;box-shadow:5px 5px 0 var(--ink);font-size:clamp(.95rem,4vw,1.25rem)}
