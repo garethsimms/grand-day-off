@@ -169,3 +169,7 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 .nps-survey,.report-stats{background:white;border:3px solid black;padding:14px;margin:20px 0}.nps-scale{display:grid;grid-template-columns:repeat(11,1fr);gap:2px}.nps-scale button{min-width:0;padding:9px 0;font-size:12px;border:2px solid black;box-shadow:none;background:white;color:black}.nps-scale button.selected{background:#ffe953}.nps-ends{display:flex;justify-content:space-between;font-size:11px}.report-button{width:100%;background:#ffe953;color:black;border:3px solid black;padding:14px;font-weight:900;margin:15px 0}
 
 .afternoon-debrief .afternoon-spot-field{padding:0;border:0;background:transparent;box-shadow:none;margin:12px 0 16px}.afternoon-debrief .spot-input{min-height:110px;padding:14px;border:3px solid #111;background:#fff;font-size:1rem}.afternoon-debrief .damage-input{border:0;border-top:2px solid #111;padding:12px 0;background:transparent;gap:8px}.afternoon-debrief .damage-input>span{font-size:.7rem}.afternoon-next{margin:15px 0 10px;font-size:.76rem;font-weight:900;line-height:1.4;letter-spacing:.02em}
+
+/* The closing survey must scroll rather than clipping the report action below it. */
+.done-card{max-height:none;overflow:visible}
+.page:has(.done-card){overflow-x:hidden;overflow-y:visible;align-items:start;place-items:center;padding-top:24px;padding-bottom:34px}
