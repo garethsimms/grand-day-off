@@ -56,7 +56,7 @@ function App(){
  const reset=()=>{localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');localStorage.removeItem('gdo-expenses');setExpenses({});setAmount('');setStep(0);setBrunchReview(false);setBrunchRating(null);setFacialReview(false);setFacialRating(null);setAfternoonReview(false);setAfternoonSpot('');setDinnerReview(false);setDinnerRatings({});setStarted(false);setIntroPage(0);setGiftOpened(false)};
 
  if(!adventureOpen)return <main className="page gift-page"><section className="card gift-card">
-  <div className="badge">A Gareth Simms Production™</div>
+  <div className="badge">A GRAND DAY OFF ❤️</div>
   {!giftOpened ? <>
    <div className="gift-sticker">TOP SECRET 💌</div>
    <h1>HAPPY BIRTHDAY, MAROES! 💖</h1>
@@ -79,7 +79,7 @@ function App(){
  </section></main>;
 
  if(!started)return <main className="page hero-page"><section className="card hero-card intro-card">
-  <div className="badge">A Gareth Simms Production · {introPage+1}/3</div>
+  <div className="badge">A GRAND DAY OFF · {introPage+1}/3</div>
   {introPage===0 ? <>
    <h1>HAPPY DAY OFF, MAROES!</h1>
    <p>Today is <strong>YOUR</strong> day. Now, I know you.</p>
@@ -98,9 +98,12 @@ function App(){
    <button onClick={()=>setIntroPage(2)}>WHAT DO I NEED? →</button>
   </> : <>
    <h1>BEFORE YOU LEAVE…</h1>
-   <p>Bring a book. One of your birthday presents, or something from the unread pile. You'll have some quiet time later. Or you could doomscroll. Your day, your choice. 😘</p>
-   <p>Bring your makeup bag and something smart(ish) for later. Not a ball gown, but maybe not your decorating clothes either. 😉 I'd go comfy during the day, then freshen up and change for the evening. Don't overthink it. You always look fabulous.</p>
-   <p className="intro-shout">FIRST RESERVATION: 11:30 · NEAR NIEUWMARKT</p>
+   <ul className="packing-list">
+    <li><span className="packing-icon">📖</span><div><strong>A BOOK</strong><p>One of your birthday presents, or something from the unread pile. You'll have some quiet time later. Or you could doomscroll. Your day, your choice. 😘</p></div></li>
+    <li><span className="packing-icon">💄</span><div><strong>MAKEUP BAG</strong><p>For a little freshen-up before the evening.</p></div></li>
+    <li><span className="packing-icon">👗</span><div><strong>SOMETHING SMART(ISH)</strong><p>Not a ball gown, but maybe not your decorating clothes either. 😉 I'd go comfy during the day and change later. Don't overthink it. You always look fabulous.</p></div></li>
+   </ul>
+   <p className="intro-shout">FIRST ARRIVAL: 11:15 · NEAR NIEUWMARKT</p>
    <button onClick={()=>{localStorage.setItem('gdo-started','true');setStarted(true)}}>RIGHT. OFF YOU GO →</button>
   </>}
  </section></main>;
