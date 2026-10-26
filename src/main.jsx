@@ -93,7 +93,7 @@ function App(){
   </>}
  </section></main>;
 
- if(started&&step<checkpoints.length&&((day<'2026-10-27'&&step>0)||(day==='2026-10-27'&&clock<checkpointUnlocks[step])))return <main className="page"><section className="card checkpoint-card wait-card"><div className="badge">NOT SO FAST. 👀</div><h2>GOOD THINGS TAKE TIME.</h2><p className="bodycopy">Your next adventure isn't quite ready yet. Enjoy where you are. ❤️</p><div className="wait-time">NEXT CHECKPOINT UNLOCKS AT {checkpointUnlocks[step]}</div><p className="micro">Amsterdam time. This screen will unlock automatically.</p></section></main>;
+ if(started&&step>0&&step<checkpoints.length&&((day<'2026-10-27')||(day==='2026-10-27'&&clock<checkpointUnlocks[step])))return <main className="page"><section className="card checkpoint-card wait-card"><div className="badge">NOT SO FAST. 👀</div><h2>GOOD THINGS TAKE TIME.</h2><p className="bodycopy">Your next adventure isn't quite ready yet. Enjoy where you are. ❤️</p><div className="wait-time">NEXT CHECKPOINT UNLOCKS AT {checkpointUnlocks[step]}</div><p className="micro">Amsterdam time. This screen will unlock automatically.</p></section></main>;
 
  if(!started)return <main className="page hero-page"><section className="card hero-card intro-card">
   <div className="badge">A GRAND DAY OFF · {introPage+1}/3</div>
