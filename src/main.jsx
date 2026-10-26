@@ -89,10 +89,9 @@ function App(){
    <button onClick={()=>setIntroPage(2)}>WHAT DO I NEED? →</button>
   </> : <>
    <h1>BEFORE YOU LEAVE…</h1>
-   <p>Bring one of your birthday books. No adding to the unread pile. 👀</p>
-   <p>Makeup bag, one of your birthday books, and something you feel fabulous in. Comfy for daytime, with an optional little glam-up for later. No need to pack half your wardrobe.</p>
-   <p className="intro-shout">FIRST RESERVATION: 11:30</p>
-   <p>Everything else is taken care of. All you have to do is turn up. ❤️</p>
+   <p>Bring a book — one of your birthday presents, or something from the unread pile. You'll have some quiet time later. Or you could doomscroll. Your day, your choice. 😘</p>
+   <p>Bring your makeup bag and something smart(ish) for later. Not a ball gown, but maybe not your decorating clothes either. 😉 I'd go comfy during the day, then freshen up and change for the evening. Don't overthink it — you always look fabulous.</p>
+   <p className="intro-shout">FIRST RESERVATION: 11:30 · NEAR NIEUWMARKT</p>
    <button onClick={()=>{localStorage.setItem('gdo-started','true');setStarted(true)}}>RIGHT. OFF YOU GO →</button>
   </>}
  </section></main>;
