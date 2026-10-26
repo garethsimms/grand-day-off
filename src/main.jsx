@@ -83,7 +83,7 @@ function App(){
    <h1>ONE VERY IMPORTANT THING.</h1>
    <p>This app guides you through the day, one checkpoint at a time.</p>
    <p className="intro-shout">NO SKIPPING AHEAD. 👀</p>
-   <p>Most of the day is yours to enjoy at your own pace. But a couple of things are booked, and for those:</p>
+   <p>There will be some appointments today, and some free time with some suggestions from me. For the things that are booked:</p>
    <p className="intro-warning">YOU. MUST. BE. ON. TIME.</p>
    <p>The app will tell you where to go and when.</p>
    <button onClick={()=>setIntroPage(2)}>WHAT DO I NEED? →</button>
