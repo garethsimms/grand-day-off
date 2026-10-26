@@ -143,7 +143,7 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 .checkpoint-card:has(.afternoon-options){max-height:calc(100dvh - 28px);overflow-y:auto;overscroll-behavior:contain}
 .afternoon-options{display:grid;gap:8px;margin-top:12px}
 .afternoon-option{border:2px solid var(--ink);background:#fff;padding:9px 10px;display:grid;gap:3px}
-.afternoon-option:first-child{background:var(--mint)}
+.afternoon-option:first-child{background:#fff}
 .afternoon-option strong{font-weight:900;font-size:.9rem}
 .afternoon-option span{font-size:.8rem;font-weight:700}
 .afternoon-option small{font-size:.76rem}
