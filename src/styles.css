@@ -157,3 +157,5 @@ aside{margin-top:13px;padding:11px;font-size:.9rem}
 .rating-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.rating-choices button{font-size:clamp(12px,3vw,17px);padding:15px 8px;background:#fff;color:#111}.rating-choices button.selected{background:#6eebbb;box-shadow:2px 2px 0 #111}
 
 .spot-input{display:block;width:100%;box-sizing:border-box;min-height:48px;padding:10px 12px;font:inherit;border:2px solid #111;border-radius:0;background:#fff;margin-top:8px}
+
+.dinner-rating{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:2px solid #111;padding:8px 0}.dinner-rating>strong{font-size:1.2rem}.dinner-rating .rating-choices{display:flex;gap:8px;margin:0}.dinner-rating .rating-choices button{min-width:65px;padding:8px 14px;font-size:1.3rem}
