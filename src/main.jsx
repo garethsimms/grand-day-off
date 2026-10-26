@@ -27,6 +27,8 @@ function mapsUrl(destination) {
 }
 
 function amsterdamDay(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Amsterdam',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
+function readReport(){try{const raw=new URLSearchParams(window.location.hash.slice(1)).get('data');return raw?JSON.parse(decodeURIComponent(escape(atob(raw)))):null}catch{return null}}
+function reportUrl(data){const json=JSON.stringify(data);return window.location.origin+window.location.pathname+'?report=1#data='+btoa(unescape(encodeURIComponent(json)))}
 function App(){
  const day=amsterdamDay();
  const preview=new URLSearchParams(window.location.search).get('preview');
@@ -46,16 +48,21 @@ function App(){
  const [afternoonSpot,setAfternoonSpot]=useState('');
  const [sideQuestOpen,setSideQuestOpen]=useState(false);
  const [dinnerReview,setDinnerReview]=useState(false);
- const [dinnerRatings,setDinnerRatings]=useState({});
+ const [dinnerRatings,setDinnerRatings]=useState(()=>JSON.parse(localStorage.getItem('gdo-dinner-ratings')||'{}'));
+ const [dayScore,setDayScore]=useState(()=>{const n=localStorage.getItem('gdo-day-score');return n===null?null:Number(n)});
+ const savedReport=readReport();
+ const reportMode=new URLSearchParams(window.location.search).has('report');
+ const reportData=savedReport||{score:dayScore,brunch:localStorage.getItem('gdo-brunch-rating'),facial:localStorage.getItem('gdo-facial-rating'),afternoon:localStorage.getItem('gdo-afternoon-spot'),dinner:dinnerRatings,expenses};
 
  const current=checkpoints[Math.min(step,checkpoints.length-1)];
  const complete=step>=checkpoints.length;
  const total=Object.values(expenses).reduce((sum,value)=>sum+(Number(value)||0),0);
  const paidCheckpoint=[0,2].includes(step);
  const progress=useMemo(()=>Math.min((step/checkpoints.length)*100,100),[step]);
- const advance=()=>{let nextExpenses=expenses;if(paidCheckpoint&&amount){nextExpenses={...expenses,[step]:Number(String(amount).replace(',','.'))||0};setExpenses(nextExpenses);localStorage.setItem('gdo-expenses',JSON.stringify(nextExpenses));}const next=step+1;setBrunchReview(false);setFacialReview(false);setAfternoonReview(false);setDinnerReview(false);localStorage.setItem('gdo-step',String(next));localStorage.setItem('gdo-started','true');setStep(next);setAmount('');window.scrollTo({top:0,behavior:'smooth'})};
+ const advance=()=>{if(step===0)localStorage.setItem('gdo-brunch-rating',brunchRating||'');if(step===1)localStorage.setItem('gdo-facial-rating',facialRating||'');if(step===2)localStorage.setItem('gdo-afternoon-spot',afternoonSpot);if(step===3)localStorage.setItem('gdo-dinner-ratings',JSON.stringify(dinnerRatings));let nextExpenses=expenses;if(paidCheckpoint&&amount){nextExpenses={...expenses,[step]:Number(String(amount).replace(',','.'))||0};setExpenses(nextExpenses);localStorage.setItem('gdo-expenses',JSON.stringify(nextExpenses));}const next=step+1;setBrunchReview(false);setFacialReview(false);setAfternoonReview(false);setDinnerReview(false);localStorage.setItem('gdo-step',String(next));localStorage.setItem('gdo-started','true');setStep(next);setAmount('');window.scrollTo({top:0,behavior:'smooth'})};
  const reset=()=>{localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');localStorage.removeItem('gdo-expenses');setExpenses({});setAmount('');setStep(0);setBrunchReview(false);setBrunchRating(null);setFacialReview(false);setFacialRating(null);setAfternoonReview(false);setAfternoonSpot('');setDinnerReview(false);setDinnerRatings({});setStarted(false);setIntroPage(0);setGiftOpened(false)};
 
+ if(reportMode)return <main className="page"><section className="card checkpoint-card"><div className="badge">🔒 MANAGEMENT EYES ONLY</div><h2>THE GRAND DAY OFF REPORT.</h2><p className="bodycopy">A highly scientific assessment of one very important day.</p><div className="report-stats"><p><strong>NPS:</strong> {reportData.score===null?'Not rated':reportData.score+'/10'}</p><p><strong>Brunch:</strong> {reportData.brunch==='up'?'👍':reportData.brunch==='down'?'👎':'Not rated'}</p><p><strong>Facial:</strong> {reportData.facial==='up'?'👍':reportData.facial==='down'?'👎':'Not rated'}</p><p><strong>Afternoon:</strong> {reportData.afternoon||'A mystery'}</p>{Object.entries(reportData.dinner||{}).map(([k,v])=><p key={k}><strong>{k}:</strong> {v==='up'?'👍':'👎'}</p>)}<p><strong>Expenses recorded:</strong> €{Object.values(reportData.expenses||{}).reduce((a,b)=>a+(Number(b)||0),0).toFixed(2)}</p></div><p className="micro">This report is contained in the link itself. Anyone with the link can read it.</p></section></main>;
  if(!adventureOpen)return <main className="page gift-page"><section className="card gift-card">
   <div className="badge">A GRAND DAY OFF ❤️</div>
   {!giftOpened ? <>
