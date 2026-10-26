@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
@@ -27,12 +27,15 @@ function mapsUrl(destination) {
 }
 
 function amsterdamDay(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Amsterdam',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
+const checkpointUnlocks=['09:00','11:45','13:45','17:15','20:00'];
+function amsterdamClock(){return new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date())}
 function readReport(){try{const raw=new URLSearchParams(window.location.hash.slice(1)).get('data');return raw?JSON.parse(decodeURIComponent(escape(atob(raw)))):null}catch{return null}}
 function reportUrl(data){const json=JSON.stringify(data);return window.location.origin+window.location.pathname+'?report=1#data='+btoa(unescape(encodeURIComponent(json)))}
 function App(){
  const day=amsterdamDay();
- const preview=new URLSearchParams(window.location.search).get('preview');
- const adventureOpen=day>='2026-10-27'||preview==='day';
+ const adventureOpen=day>='2026-10-27';
+ const [clock,setClock]=useState(amsterdamClock);
+ useEffect(()=>{const timer=setInterval(()=>setClock(amsterdamClock()),15000);return()=>clearInterval(timer)},[]);
  const [giftOpened,setGiftOpened]=useState(()=>localStorage.getItem('gdo-gift-opened')==='true');
  if(new URLSearchParams(window.location.search).has('reset')){if(window.confirm('Reset the Grand Day Off demo and erase saved progress and expenses?')){localStorage.removeItem('gdo-step');localStorage.removeItem('gdo-started');localStorage.removeItem('gdo-expenses');localStorage.removeItem('gdo-gift-opened');}window.history.replaceState({},'',window.location.pathname);}
  const [started,setStarted]=useState(()=>localStorage.getItem('gdo-started')==='true');
@@ -85,6 +88,8 @@ function App(){
    <button className="gift-back" onClick={()=>{localStorage.setItem("gdo-gift-opened","false");setGiftOpened(false)}}>← SHOW MY PRESENT AGAIN</button>
   </>}
  </section></main>;
+
+ if(started&&day==='2026-10-27'&&step<checkpoints.length&&clock<checkpointUnlocks[step])return <main className="page"><section className="card checkpoint-card wait-card"><div className="badge">NOT SO FAST. 👀</div><h2>GOOD THINGS TAKE TIME.</h2><p className="bodycopy">Your next adventure isn't quite ready yet. Enjoy where you are. ❤️</p><div className="wait-time">NEXT CHECKPOINT UNLOCKS AT {checkpointUnlocks[step]}</div><p className="micro">Amsterdam time. This screen will unlock automatically.</p></section></main>;
 
  if(!started)return <main className="page hero-page"><section className="card hero-card intro-card">
   <div className="badge">A GRAND DAY OFF · {introPage+1}/3</div>
