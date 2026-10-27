@@ -36,6 +36,22 @@ function App(){
  const adventureOpen=day>='2026-10-26';
  const [clock,setClock]=useState(amsterdamClock);
  useEffect(()=>{const timer=setInterval(()=>setClock(amsterdamClock()),15000);return()=>clearInterval(timer)},[]);
+ const [remoteUnlockThrough,setRemoteUnlockThrough]=useState(0);
+ useEffect(()=>{
+  let active=true;
+  const check=async()=>{
+   try{
+    const response=await fetch('https://api.github.com/repos/garethsimms/grand-day-off/issues/1',{cache:'no-store',headers:{Accept:'application/vnd.github+json'}});
+    if(!response.ok)return;
+    const issue=await response.json();
+    const match=String(issue.body||'').match(/UNLOCK_THROUGH\\s*=\\s*([0-5])/i);
+    if(active&&match)setRemoteUnlockThrough(Number(match[1]));
+   }catch{/* Keep the normal unlock schedule if GitHub is unreachable. */}
+  };
+  check();
+  const timer=setInterval(check,90000);
+  return()=>{active=false;clearInterval(timer)};
+ },[]);
  const tourMode=new URLSearchParams(window.location.search).has('tour');
  const [tourStep,setTourStep]=useState(0);
  const [giftOpened,setGiftOpened]=useState(()=>localStorage.getItem('gdo-gift-opened')==='true');
@@ -93,7 +109,7 @@ function App(){
   </>}
  </section></main>;
 
- if(started&&step>0&&step<checkpoints.length&&((day<'2026-10-27')||(day==='2026-10-27'&&clock<checkpointUnlocks[step])))return <main className="page"><section className="card checkpoint-card wait-card"><div className="badge">NOT SO FAST. 👀</div><h2>GOOD THINGS TAKE TIME.</h2><p className="bodycopy">Your next adventure isn't quite ready yet. Enjoy where you are. ❤️</p><div className="wait-time">NEXT CHECKPOINT UNLOCKS AT {checkpointUnlocks[step]}</div><p className="micro">Amsterdam time. This screen will unlock automatically.</p></section></main>;
+ if(started&&step>0&&step<checkpoints.length&&remoteUnlockThrough<step+1&&((day<'2026-10-27')||(day==='2026-10-27'&&clock<checkpointUnlocks[step])))return <main className="page"><section className="card checkpoint-card wait-card"><div className="badge">NOT SO FAST. 👀</div><h2>GOOD THINGS TAKE TIME.</h2><p className="bodycopy">Your next adventure isn't quite ready yet. Enjoy where you are. ❤️</p><div className="wait-time">NEXT CHECKPOINT UNLOCKS AT {checkpointUnlocks[step]}</div><p className="micro">Amsterdam time. This screen will unlock automatically.</p></section></main>;
 
  if(!started)return <main className="page hero-page"><section className="card hero-card intro-card">
   <div className="badge">A GRAND DAY OFF · {introPage+1}/3</div>
