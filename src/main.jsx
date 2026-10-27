@@ -44,7 +44,7 @@ function App(){
     const response=await fetch('https://api.github.com/repos/garethsimms/grand-day-off/issues/1',{cache:'no-store',headers:{Accept:'application/vnd.github+json'}});
     if(!response.ok)return;
     const issue=await response.json();
-    const match=String(issue.body||'').match(/UNLOCK_THROUGH\\s*=\\s*([0-5])/i);
+    const match=String(issue.body||'').match(/UNLOCK_THROUGH\s*=\s*([0-5])/i);
     if(active&&match)setRemoteUnlockThrough(Number(match[1]));
    }catch{/* Keep the normal unlock schedule if GitHub is unreachable. */}
   };
